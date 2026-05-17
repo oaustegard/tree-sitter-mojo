@@ -148,6 +148,7 @@ module.exports = grammar({
       $.nonlocal_statement,
       $.exec_statement,
       $.type_alias_statement,
+      $.variable_declaration,
     ),
 
     import_statement: $ => seq(
@@ -860,6 +861,13 @@ module.exports = grammar({
         seq(':', field('type', $.type)),
         seq(':', field('type', $.type), '=', field('right', $._right_hand_side)),
       ),
+    ),
+
+    variable_declaration: $ => seq(
+      'var',
+      field('name', $.identifier),
+      optional(seq(':', field('type', $.type))),
+      optional(seq('=', field('value', $._right_hand_side))),
     ),
 
     augmented_assignment: $ => seq(
