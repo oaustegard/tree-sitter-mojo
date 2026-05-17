@@ -536,6 +536,8 @@ module.exports = grammar({
       field('definition', choice(
         $.class_definition,
         $.function_definition,
+        $.struct_definition,
+        $.trait_definition,
       )),
     ),
 

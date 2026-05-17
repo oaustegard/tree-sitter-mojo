@@ -2336,6 +2336,14 @@
               {
                 "type": "SYMBOL",
                 "name": "function_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "struct_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "trait_definition"
               }
             ]
           }
