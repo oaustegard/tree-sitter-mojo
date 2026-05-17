@@ -506,10 +506,16 @@ module.exports = grammar({
 
     type_parameter: $ => seq(
       '[',
-      commaSep1($.type),
+      commaSep1(choice(
+        $.type,
+        $.keyword_argument,
+        $.infer_only_separator,
+      )),
       optional(','),
       ']',
     ),
+
+    infer_only_separator: _ => '//',
 
     parenthesized_list_splat: $ => prec(PREC.parenthesized_list_splat, seq(
       '(',
@@ -986,7 +992,7 @@ module.exports = grammar({
     subscript: $ => prec(PREC.call, seq(
       field('value', $.primary_expression),
       '[',
-      commaSep1(field('subscript', choice($.expression, $.slice))),
+      commaSep1(field('subscript', choice($.expression, $.slice, $.keyword_argument))),
       optional(','),
       ']',
     )),

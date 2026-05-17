@@ -2156,8 +2156,21 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "type"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "keyword_argument"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "infer_only_separator"
+                }
+              ]
             },
             {
               "type": "REPEAT",
@@ -2169,8 +2182,21 @@
                     "value": ","
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "type"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "type"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "keyword_argument"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "infer_only_separator"
+                      }
+                    ]
                   }
                 ]
               }
@@ -2194,6 +2220,10 @@
           "value": "]"
         }
       ]
+    },
+    "infer_only_separator": {
+      "type": "STRING",
+      "value": "//"
     },
     "parenthesized_list_splat": {
       "type": "PREC",
@@ -5100,6 +5130,10 @@
                     {
                       "type": "SYMBOL",
                       "name": "slice"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "keyword_argument"
                     }
                   ]
                 }
@@ -5126,6 +5160,10 @@
                           {
                             "type": "SYMBOL",
                             "name": "slice"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "keyword_argument"
                           }
                         ]
                       }
