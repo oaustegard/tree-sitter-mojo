@@ -220,6 +220,10 @@
         "named": true
       },
       {
+        "type": "mojo_parameter",
+        "named": true
+      },
+      {
         "type": "positional_separator",
         "named": true
       },
@@ -443,6 +447,22 @@
         "types": [
           {
             "type": "dotted_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "argument_convention",
+    "named": true,
+    "fields": {
+      "lifetime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -2560,6 +2580,42 @@
     }
   },
   {
+    "type": "mojo_parameter",
+    "named": true,
+    "fields": {
+      "convention": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_convention",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "named_expression",
     "named": true,
     "fields": {
@@ -3851,6 +3907,10 @@
     "named": false
   },
   {
+    "type": "borrowed",
+    "named": false
+  },
+  {
     "type": "break",
     "named": false
   },
@@ -3877,6 +3937,10 @@
   },
   {
     "type": "def",
+    "named": false
+  },
+  {
+    "type": "deinit",
     "named": false
   },
   {
@@ -3956,6 +4020,10 @@
     "named": false
   },
   {
+    "type": "inout",
+    "named": false
+  },
+  {
     "type": "integer",
     "named": true
   },
@@ -3977,6 +4045,10 @@
     "named": false
   },
   {
+    "type": "mut",
+    "named": false
+  },
+  {
     "type": "none",
     "named": true
   },
@@ -3990,6 +4062,14 @@
   },
   {
     "type": "or",
+    "named": false
+  },
+  {
+    "type": "out",
+    "named": false
+  },
+  {
+    "type": "owned",
     "named": false
   },
   {
@@ -4007,6 +4087,14 @@
   {
     "type": "raises_clause",
     "named": true
+  },
+  {
+    "type": "read",
+    "named": false
+  },
+  {
+    "type": "ref",
+    "named": false
   },
   {
     "type": "return",

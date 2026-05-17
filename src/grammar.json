@@ -3209,6 +3209,135 @@
         {
           "type": "SYMBOL",
           "name": "dictionary_splat_pattern"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mojo_parameter"
+        }
+      ]
+    },
+    "mojo_parameter": {
+      "type": "PREC_DYNAMIC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "convention",
+            "content": {
+              "type": "SYMBOL",
+              "name": "argument_convention"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ":"
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "type",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "type"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "argument_convention": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "owned"
+        },
+        {
+          "type": "STRING",
+          "value": "borrowed"
+        },
+        {
+          "type": "STRING",
+          "value": "inout"
+        },
+        {
+          "type": "STRING",
+          "value": "mut"
+        },
+        {
+          "type": "STRING",
+          "value": "read"
+        },
+        {
+          "type": "STRING",
+          "value": "out"
+        },
+        {
+          "type": "STRING",
+          "value": "var"
+        },
+        {
+          "type": "STRING",
+          "value": "deinit"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "ref"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "["
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "lifetime",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "]"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -6574,6 +6703,13 @@
     [
       "match_statement",
       "primary_expression"
+    ],
+    [
+      "mojo_parameter"
+    ],
+    [
+      "mojo_parameter",
+      "constrained_type"
     ]
   ],
   "precedences": [],
