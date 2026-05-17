@@ -287,6 +287,7 @@ module.exports = grammar({
       $.function_definition,
       $.class_definition,
       $.struct_definition,
+      $.trait_definition,
       $.decorated_definition,
       $.match_statement,
     ),
@@ -487,6 +488,16 @@ module.exports = grammar({
       ':',
       field('body', $._suite),
     ),
+
+    trait_definition: $ => seq(
+      'trait',
+      field('name', $.identifier),
+      field('type_parameters', optional($.type_parameter)),
+      field('traits', optional($.argument_list)),
+      ':',
+      field('body', $._suite),
+    ),
+
     type_parameter: $ => seq(
       '[',
       commaSep1($.type),
