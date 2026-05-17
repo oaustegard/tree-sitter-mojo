@@ -1,0 +1,86 @@
+==================
+var with initializer only
+==================
+
+var x = 5
+
+---
+
+(module
+  (variable_declaration
+    name: (identifier)
+    value: (integer)))
+
+==================
+var with type and initializer
+==================
+
+var x: Int = 5
+
+---
+
+(module
+  (variable_declaration
+    name: (identifier)
+    type: (type
+      (identifier))
+    value: (integer)))
+
+==================
+var with type, no initializer
+==================
+
+var name: String
+
+---
+
+(module
+  (variable_declaration
+    name: (identifier)
+    type: (type
+      (identifier))))
+
+==================
+var with parameterized type and list initializer
+==================
+
+var books: List[String] = ["a", "b"]
+
+---
+
+(module
+  (variable_declaration
+    name: (identifier)
+    type: (type
+      (generic_type
+        (identifier)
+        (type_parameter
+          (type
+            (identifier)))))
+    value: (list
+      (string
+        (string_start)
+        (string_content)
+        (string_end))
+      (string
+        (string_start)
+        (string_content)
+        (string_end)))))
+
+==================
+var inside function body
+==================
+
+def main():
+    var x = 5
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (variable_declaration
+        name: (identifier)
+        value: (integer)))))
