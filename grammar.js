@@ -407,15 +407,19 @@ module.exports = grammar({
       field('name', $.identifier),
       field('type_parameters', optional($.type_parameter)),
       field('parameters', $.parameters),
+      optional($.raises_clause),
       optional(
         seq(
           '->',
           field('return_type', $.type),
         ),
       ),
+      optional($.raises_clause),
       ':',
       field('body', $._suite),
     ),
+
+    raises_clause: _ => 'raises',
 
     parameters: $ => seq(
       '(',
