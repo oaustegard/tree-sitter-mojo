@@ -50,6 +50,10 @@
     "named": true,
     "subtypes": [
       {
+        "type": "alias_declaration",
+        "named": true
+      },
+      {
         "type": "assert_statement",
         "named": true
       },
@@ -364,6 +368,52 @@
         "named": true
       }
     ]
+  },
+  {
+    "type": "alias_declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assignment",
+            "named": true
+          },
+          {
+            "type": "augmented_assignment",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "expression_list",
+            "named": true
+          },
+          {
+            "type": "pattern_list",
+            "named": true
+          },
+          {
+            "type": "yield",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "aliased_import",
@@ -3709,6 +3759,10 @@
   },
   {
     "type": "__future__",
+    "named": false
+  },
+  {
+    "type": "alias",
     "named": false
   },
   {

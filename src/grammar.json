@@ -143,6 +143,10 @@
         {
           "type": "SYMBOL",
           "name": "comptime_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "alias_declaration"
         }
       ]
     },
@@ -4528,6 +4532,35 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "alias_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "alias"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_right_hand_side"
+          }
         }
       ]
     },

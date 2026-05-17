@@ -150,6 +150,7 @@ module.exports = grammar({
       $.type_alias_statement,
       $.variable_declaration,
       $.comptime_declaration,
+      $.alias_declaration,
     ),
 
     import_statement: $ => seq(
@@ -876,6 +877,13 @@ module.exports = grammar({
       field('name', $.identifier),
       optional(seq(':', field('type', $.type))),
       optional(seq('=', field('value', $._right_hand_side))),
+    ),
+
+    alias_declaration: $ => seq(
+      'alias',
+      field('name', $.identifier),
+      '=',
+      field('value', $._right_hand_side),
     ),
 
     augmented_assignment: $ => seq(

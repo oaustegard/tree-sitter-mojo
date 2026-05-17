@@ -1,0 +1,60 @@
+==================
+alias with integer literal
+==================
+
+alias MAX_BITS = 64
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    value: (integer)))
+
+==================
+alias with identifier (function reference)
+==================
+
+alias hello = my_function
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    value: (identifier)))
+
+==================
+alias with parameterized type
+==================
+
+alias Float64Array = SIMD[DType.float64, 1]
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    value: (subscript
+      value: (identifier)
+      subscript: (attribute
+        object: (identifier)
+        attribute: (identifier))
+      subscript: (integer))))
+
+==================
+alias inside struct body
+==================
+
+struct Config:
+    alias DEFAULT_SIZE = 64
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (alias_declaration
+        name: (identifier)
+        value: (integer)))))
