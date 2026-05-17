@@ -1,0 +1,86 @@
+==================
+transfer of bare identifier
+==================
+
+def main():
+    return cps^
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (return_statement
+        (transfer_expression
+          (identifier))))))
+
+==================
+transfer in assignment RHS
+==================
+
+def main():
+    self.collection = collection^
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (assignment
+        left: (attribute
+          object: (identifier)
+          attribute: (identifier))
+        right: (transfer_expression
+          (identifier))))))
+
+==================
+transfer of attribute access
+==================
+
+def main():
+    self.x = take.x^
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (assignment
+        left: (attribute
+          object: (identifier)
+          attribute: (identifier))
+        right: (transfer_expression
+          (attribute
+            object: (identifier)
+            attribute: (identifier)))))))
+
+==================
+transfer as call argument
+==================
+
+def main():
+    var fuse = Fuse(books^, threshold=0.4)
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (variable_declaration
+        name: (identifier)
+        value: (call
+          function: (identifier)
+          arguments: (argument_list
+            (transfer_expression
+              (identifier))
+            (keyword_argument
+              name: (identifier)
+              value: (float))))))))
