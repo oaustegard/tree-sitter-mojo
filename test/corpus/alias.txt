@@ -58,3 +58,72 @@ struct Config:
       (alias_declaration
         name: (identifier)
         value: (integer)))))
+
+==================
+alias with type and value (typed constant)
+==================
+
+alias DEFAULT_SIZE: Int = 64
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    type: (type
+      (identifier))
+    value: (integer)))
+
+==================
+alias with type only (abstract, no value)
+==================
+
+alias ElementType: AnyType
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    type: (type
+      (identifier))))
+
+==================
+abstract alias inside trait body
+==================
+
+trait Container:
+    alias ElementType: AnyType
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    body: (block
+      (alias_declaration
+        name: (identifier)
+        type: (type
+          (identifier))))))
+
+==================
+abstract alias with parameterized type bound inside trait
+==================
+
+trait Sequence:
+    alias Iter: Iterator[Self]
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    body: (block
+      (alias_declaration
+        name: (identifier)
+        type: (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (type
+                (identifier)))))))))

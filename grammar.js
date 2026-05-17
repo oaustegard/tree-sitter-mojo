@@ -916,8 +916,8 @@ module.exports = grammar({
     alias_declaration: $ => seq(
       'alias',
       field('name', $.identifier),
-      '=',
-      field('value', $._right_hand_side),
+      optional(seq(':', field('type', $.type))),
+      optional(seq('=', field('value', $._right_hand_side))),
     ),
 
     augmented_assignment: $ => seq(
