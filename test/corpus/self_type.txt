@@ -1,0 +1,99 @@
+==================
+Self as return type
+==================
+
+struct Foo:
+    fn clone(self) -> Self:
+        pass
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier))
+        return_type: (type
+          (identifier))
+        body: (block
+          (pass_statement))))))
+
+==================
+Self as parameter type with keyword-only marker
+==================
+
+struct Foo:
+    fn __init__(self, *, copy: Self):
+        pass
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier)
+          (keyword_separator)
+          (typed_parameter
+            (identifier)
+            type: (type
+              (identifier))))
+        body: (block
+          (pass_statement))))))
+
+==================
+self as bare parameter (no annotation)
+==================
+
+struct Foo:
+    fn __init__(self):
+        pass
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier))
+        body: (block
+          (pass_statement))))))
+
+==================
+multiple keyword-only parameters with Self
+==================
+
+struct Foo:
+    fn __init__(self, *, copy: Self, take: Self):
+        pass
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier)
+          (keyword_separator)
+          (typed_parameter
+            (identifier)
+            type: (type
+              (identifier)))
+          (typed_parameter
+            (identifier)
+            type: (type
+              (identifier))))
+        body: (block
+          (pass_statement))))))

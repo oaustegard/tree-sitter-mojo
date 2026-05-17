@@ -55,6 +55,8 @@ module.exports = grammar({
     [$.print_statement, $.primary_expression],
     [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
+    [$.mojo_parameter],
+    [$.mojo_parameter, $.constrained_type],
   ],
 
   supertypes: $ => [
@@ -678,6 +680,22 @@ module.exports = grammar({
       $.keyword_separator,
       $.positional_separator,
       $.dictionary_splat_pattern,
+      $.mojo_parameter,
+    ),
+
+    mojo_parameter: $ => prec.dynamic(1, seq(
+      field('convention', $.argument_convention),
+      field('name', $.identifier),
+      optional(seq(
+        ':',
+        field('type', $.type),
+      )),
+    )),
+
+    argument_convention: $ => choice(
+      'owned', 'borrowed', 'inout', 'mut', 'read',
+      'out', 'var', 'deinit',
+      seq('ref', optional(seq('[', field('lifetime', $.identifier), ']'))),
     ),
 
     pattern: $ => choice(
@@ -768,6 +786,7 @@ module.exports = grammar({
       $.attribute,
       $.subscript,
       $.call,
+      $.transfer_expression,
       $.list,
       $.list_comprehension,
       $.dictionary,
@@ -811,7 +830,9 @@ module.exports = grammar({
         [prec.right, '**', PREC.power],
         [prec.left, '|', PREC.bitwise_or],
         [prec.left, '&', PREC.bitwise_and],
-        [prec.left, '^', PREC.xor],
+        // '^' XOR removed: Mojo uses '^' as the postfix ownership-transfer
+        // operator (transfer_expression below). Bitwise XOR in Mojo is done
+        // via stdlib functions, not the '^' operator.
         [prec.left, '<<', PREC.shift],
         [prec.left, '>>', PREC.shift],
       ];
@@ -951,6 +972,11 @@ module.exports = grammar({
       field('object', $.primary_expression),
       '.',
       field('attribute', $.identifier),
+    )),
+
+    transfer_expression: $ => prec(PREC.call, seq(
+      $.primary_expression,
+      '^',
     )),
 
     subscript: $ => prec(PREC.call, seq(
