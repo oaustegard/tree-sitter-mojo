@@ -2917,6 +2917,36 @@
     }
   },
   {
+    "type": "ref_type",
+    "named": true,
+    "fields": {
+      "origin": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "referent": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "relative_import",
     "named": true,
     "fields": {},
@@ -3360,6 +3390,10 @@
         },
         {
           "type": "member_type",
+          "named": true
+        },
+        {
+          "type": "ref_type",
           "named": true
         },
         {
