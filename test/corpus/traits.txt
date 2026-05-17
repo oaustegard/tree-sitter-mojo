@@ -1,0 +1,77 @@
+==================
+trait with single method
+==================
+
+trait Stringable:
+    fn __str__(self) -> String:
+        ...
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier))
+        return_type: (type
+          (identifier))
+        body: (block
+          (ellipsis))))))
+
+==================
+trait with supertrait
+==================
+
+trait Sortable(Movable):
+    fn cmp(self, other: Self) -> Int:
+        ...
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    traits: (argument_list
+      (identifier))
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier)
+          (typed_parameter
+            (identifier)
+            type: (type
+              (identifier))))
+        return_type: (type
+          (identifier))
+        body: (block
+          (ellipsis))))))
+
+==================
+trait with type parameters
+==================
+
+trait Container[T]:
+    fn get(self) -> T:
+        ...
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (identifier)))
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier))
+        return_type: (type
+          (identifier))
+        body: (block
+          (ellipsis))))))
