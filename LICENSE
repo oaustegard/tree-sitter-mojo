@@ -1,6 +1,8 @@
 The MIT License (MIT)
 
-Copyright (c) 2016 Max Brunsfeld
+Copyright (c) 2016 Max Brunsfeld (tree-sitter-python grammar base)
+Copyright (c) 2023 HerringtonDarkholme (initial tree-sitter-mojo concept)
+Copyright (c) 2026 Oskar Austegard (this fork)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

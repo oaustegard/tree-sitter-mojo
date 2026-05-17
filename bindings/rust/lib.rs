@@ -4,7 +4,7 @@
 // See the LICENSE file in this repo for license details.
 // ------------------------------------------------------------------------------------------------
 
-//! This crate provides a Python grammar for the [tree-sitter][] parsing library.
+//! This crate provides a Mojo grammar for the [tree-sitter][] parsing library.
 //!
 //! Typically, you will use the [language][language func] function to add this grammar to a
 //! tree-sitter [Parser][], and then use the parser to parse some code:
@@ -17,7 +17,7 @@
 //!         return x * 2
 //! "#;
 //! let mut parser = Parser::new();
-//! parser.set_language(tree_sitter_mojo::language()).expect("Error loading Python grammar");
+//! parser.set_language(tree_sitter_mojo::language()).expect("Error loading Mojo grammar");
 //! let parsed = parser.parse(code, None);
 //! # let parsed = parsed.unwrap();
 //! # let root = parsed.root_node();
@@ -42,7 +42,7 @@ pub fn language() -> Language {
     unsafe { tree_sitter_mojo() }
 }
 
-/// The source of the Python tree-sitter grammar description.
+/// The source of the Mojo tree-sitter grammar description.
 pub const GRAMMAR: &'static str = include_str!("../../grammar.js");
 
 /// The syntax highlighting query for this language.
@@ -63,6 +63,6 @@ mod tests {
         let mut parser = tree_sitter::Parser::new();
         parser
             .set_language(super::language())
-            .expect("Error loading Python grammar");
+            .expect("Error loading Mojo grammar");
     }
 }

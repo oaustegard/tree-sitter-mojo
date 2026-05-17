@@ -1,0 +1,35 @@
+{
+  "grammars": [
+    {
+      "name": "mojo",
+      "camelcase": "Mojo",
+      "scope": "source.mojo",
+      "path": ".",
+      "file-types": [
+        "mojo",
+        "🔥"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "mojo"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Mojo grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Oskar Austegard"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/oaustegard/tree-sitter-mojo"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "node": true,
+    "python": true,
+    "rust": true
+  }
+}
