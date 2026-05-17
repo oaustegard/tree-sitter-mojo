@@ -7,6 +7,17 @@ tree-sitter-mojo
 
 Acceptance corpus: the source of [fusemojo](https://github.com/oaustegard/fusemojo) (~640 lines of real Mojo across 4 files). v1.0 ships when `script/check-errors.sh` reports zero ERROR/MISSING nodes against the corpus.
 
+## Target Mojo version
+
+Pinned to **Mojo 1.0.0b1** (Modular SDK 26.3.0, May 2026). The acceptance corpus (fusemojo) builds against Mojo 26.2+, so the grammar is verified across the 26.2 → 1.0.0b1 window.
+
+The grammar intentionally accepts deprecated argument-convention spellings alongside the modern ones for cross-version compatibility:
+
+- `inout` (legacy) and `mut` (current)
+- `borrowed` (legacy) and `read` (current)
+
+This lets a single grammar parse code written against any Mojo release in the 26.x → 1.x range without forcing a flag day.
+
 ## Lineage
 
 - Initial concept and `fn`/`struct` keywords: [HerringtonDarkholme/tree-sitter-mojo](https://github.com/HerringtonDarkholme/tree-sitter-mojo) (MIT, last touched 2023-05-10).
