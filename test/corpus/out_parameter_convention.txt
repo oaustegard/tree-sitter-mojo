@@ -1,0 +1,20 @@
+==================
+out convention on non-self typed parameter
+==================
+
+fn f(out result: Int):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))

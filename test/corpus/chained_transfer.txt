@@ -1,0 +1,45 @@
+==================
+transfer of call result, then chained method call
+==================
+
+def main():
+    return x.method()^.next()
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (return_statement
+        (call
+          function: (attribute
+            object: (transfer_expression
+              (call
+                function: (attribute
+                  object: (identifier)
+                  attribute: (identifier))
+                arguments: (argument_list)))
+            attribute: (identifier))
+          arguments: (argument_list))))))
+
+==================
+transfer of subscript expression
+==================
+
+def main():
+    return arr[i]^
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (return_statement
+        (transfer_expression
+          (subscript
+            value: (identifier)
+            subscript: (identifier)))))))
