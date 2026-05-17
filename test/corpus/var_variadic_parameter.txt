@@ -1,0 +1,111 @@
+==================
+var convention on typed variadic parameter
+==================
+
+fn f(var *xs: T):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (list_splat_pattern
+          (identifier))
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+var convention on bare variadic parameter
+==================
+
+fn f(var *xs):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (list_splat_pattern
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+out self + var variadic in __init__
+==================
+
+fn __init__(out self, var *headers: Header):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier))
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (list_splat_pattern
+          (identifier))
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+mut / read / owned on typed variadic
+==================
+
+fn a(mut *xs: T): pass
+fn b(read *xs: T): pass
+fn c(owned *xs: T): pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (list_splat_pattern
+          (identifier))
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement)))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (list_splat_pattern
+          (identifier))
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement)))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (list_splat_pattern
+          (identifier))
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
