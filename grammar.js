@@ -1047,8 +1047,16 @@ module.exports = grammar({
       $.union_type,
       $.constrained_type,
       $.member_type,
+      $.ref_type,
     ),
     splat_type: $ => prec(1, seq(choice('*', '**'), $.identifier)),
+    ref_type: $ => prec(1, seq(
+      'ref',
+      '[',
+      field('origin', commaSep1($.expression)),
+      ']',
+      field('referent', $.type),
+    )),
     generic_type: $ => prec(1, seq(
       choice(
         $.identifier,

@@ -1,0 +1,115 @@
+==================
+ref return type with single-attribute origin
+==================
+
+fn g(self) -> ref [self.value] T:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (identifier))
+    return_type: (type
+      (ref_type
+        origin: (attribute
+          object: (identifier)
+          attribute: (identifier))
+        referent: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+ref return type with multiple origins
+==================
+
+fn g(self) -> ref [self.a, self.b] T:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (identifier))
+    return_type: (type
+      (ref_type
+        origin: (attribute
+          object: (identifier)
+          attribute: (identifier))
+        origin: (attribute
+          object: (identifier)
+          attribute: (identifier))
+        referent: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+ref return type with __origin_of()
+==================
+
+fn g(self) -> ref [__origin_of(self)] T:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (identifier))
+    return_type: (type
+      (ref_type
+        origin: (call
+          function: (identifier)
+          arguments: (argument_list
+            (identifier)))
+        referent: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+ref return type in parameterized struct method
+==================
+
+struct S:
+    fn __getitem__[T: AnyType](self) -> ref [self.value] T:
+        return self.value[T]
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        type_parameters: (type_parameter
+          (type
+            (constrained_type
+              (type
+                (identifier))
+              (type
+                (identifier)))))
+        parameters: (parameters
+          (identifier))
+        return_type: (type
+          (ref_type
+            origin: (attribute
+              object: (identifier)
+              attribute: (identifier))
+            referent: (type
+              (identifier))))
+        body: (block
+          (return_statement
+            (subscript
+              value: (attribute
+                object: (identifier)
+                attribute: (identifier))
+              subscript: (identifier))))))))
