@@ -1324,6 +1324,14 @@
           {
             "type": "function_definition",
             "named": true
+          },
+          {
+            "type": "struct_definition",
+            "named": true
+          },
+          {
+            "type": "trait_definition",
+            "named": true
           }
         ]
       }

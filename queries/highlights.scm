@@ -14,6 +14,16 @@
    @function.builtin
    "^(abs|all|any|ascii|bin|bool|breakpoint|bytearray|bytes|callable|chr|classmethod|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|vars|zip|__import__)$"))
 
+; Mojo built-in decorators (recognized before the generic @function below)
+
+((decorator
+  (identifier) @attribute.builtin)
+ (#match? @attribute.builtin "^(fieldwise_init|register_passable|parameter|value|always_inline|noinline|staticmethod|nonmaterializable)$"))
+
+((decorator
+  (call function: (identifier) @attribute.builtin))
+ (#match? @attribute.builtin "^(fieldwise_init|register_passable|parameter|value|always_inline|noinline|staticmethod|nonmaterializable)$"))
+
 ; Function calls
 
 (decorator) @function

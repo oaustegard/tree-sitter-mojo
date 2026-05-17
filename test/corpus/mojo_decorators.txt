@@ -1,0 +1,119 @@
+==================
+@fieldwise_init on struct
+==================
+
+@fieldwise_init
+struct Point(Copyable, Movable):
+    var x: Int
+    var y: Int
+
+---
+
+(module
+  (decorated_definition
+    (decorator
+      (identifier))
+    definition: (struct_definition
+      name: (identifier)
+      traits: (argument_list
+        (identifier)
+        (identifier))
+      body: (block
+        (variable_declaration
+          name: (identifier)
+          type: (type
+            (identifier)))
+        (variable_declaration
+          name: (identifier)
+          type: (type
+            (identifier)))))))
+
+==================
+@register_passable with string argument on struct
+==================
+
+@register_passable("trivial")
+struct Color:
+    pass
+
+---
+
+(module
+  (decorated_definition
+    (decorator
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end)))))
+    definition: (struct_definition
+      name: (identifier)
+      body: (block
+        (pass_statement)))))
+
+==================
+@parameter on fn with type parameters
+==================
+
+@parameter
+fn unroll[N: Int]():
+    pass
+
+---
+
+(module
+  (decorated_definition
+    (decorator
+      (identifier))
+    definition: (function_definition
+      name: (identifier)
+      type_parameters: (type_parameter
+        (type
+          (constrained_type
+            (type
+              (identifier))
+            (type
+              (identifier)))))
+      parameters: (parameters)
+      body: (block
+        (pass_statement)))))
+
+==================
+@value on struct
+==================
+
+@value
+struct OldStyle:
+    pass
+
+---
+
+(module
+  (decorated_definition
+    (decorator
+      (identifier))
+    definition: (struct_definition
+      name: (identifier)
+      body: (block
+        (pass_statement)))))
+
+==================
+@fieldwise_init on trait
+==================
+
+@fieldwise_init
+trait MyTrait:
+    pass
+
+---
+
+(module
+  (decorated_definition
+    (decorator
+      (identifier))
+    definition: (trait_definition
+      name: (identifier)
+      body: (block
+        (pass_statement)))))
