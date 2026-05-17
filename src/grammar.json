@@ -1635,6 +1635,44 @@
               "type": "SEQ",
               "members": [
                 {
+                  "type": "FIELD",
+                  "name": "raises",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "raises_clause"
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "->"
+                        },
+                        {
+                          "type": "FIELD",
+                          "name": "return_type",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "type"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
                   "type": "STRING",
                   "value": "->"
                 },
@@ -1645,11 +1683,28 @@
                     "type": "SYMBOL",
                     "name": "type"
                   }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "raises",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "raises_clause"
+                      }
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 }
               ]
             },
             {
-              "type": "BLANK"
+              "type": "SEQ",
+              "members": []
             }
           ]
         },
@@ -1666,6 +1721,10 @@
           }
         }
       ]
+    },
+    "raises_clause": {
+      "type": "STRING",
+      "value": "raises"
     },
     "parameters": {
       "type": "SEQ",

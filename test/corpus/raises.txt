@@ -1,0 +1,77 @@
+==================
+def with raises, no return type
+==================
+
+def main() raises:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    raises: (raises_clause)
+    body: (block
+      (pass_statement))))
+
+==================
+def with raises before return type (fusemojo style)
+==================
+
+def parse(s: String) raises -> Int:
+    return 5
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    raises: (raises_clause)
+    return_type: (type
+      (identifier))
+    body: (block
+      (return_statement
+        (integer)))))
+
+==================
+fn with raises, no return type
+==================
+
+fn foo() raises:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    raises: (raises_clause)
+    body: (block
+      (pass_statement))))
+
+==================
+fn with return type then raises
+==================
+
+fn bar() -> Int raises:
+    return 0
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (identifier))
+    raises: (raises_clause)
+    body: (block
+      (return_statement
+        (integer)))))

@@ -407,15 +407,24 @@ module.exports = grammar({
       field('name', $.identifier),
       field('type_parameters', optional($.type_parameter)),
       field('parameters', $.parameters),
-      optional(
+      // Mojo: `raises` may appear before or after the return-type arrow.
+      choice(
+        seq(
+          field('raises', $.raises_clause),
+          optional(seq('->', field('return_type', $.type))),
+        ),
         seq(
           '->',
           field('return_type', $.type),
+          optional(field('raises', $.raises_clause)),
         ),
+        seq(), // neither return-type nor raises
       ),
       ':',
       field('body', $._suite),
     ),
+
+    raises_clause: _ => 'raises',
 
     parameters: $ => seq(
       '(',
