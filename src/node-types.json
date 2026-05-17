@@ -1830,6 +1830,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "raises_clause",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -3750,6 +3760,10 @@
   {
     "type": "raise",
     "named": false
+  },
+  {
+    "type": "raises_clause",
+    "named": true
   },
   {
     "type": "return",

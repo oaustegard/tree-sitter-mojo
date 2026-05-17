@@ -1,0 +1,76 @@
+==================
+raises after parameters, no return type
+==================
+
+def main() raises:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    (raises_clause)
+    body: (block
+      (pass_statement))))
+
+==================
+raises between parameters and return type
+==================
+
+def parse(s: String) raises -> Int:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    (raises_clause)
+    return_type: (type
+      (identifier))
+    body: (block
+      (pass_statement))))
+
+==================
+raises after return type
+==================
+
+fn foo() -> None raises:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (none))
+    (raises_clause)
+    body: (block
+      (pass_statement))))
+
+==================
+fn with no raises still parses
+==================
+
+fn bar() -> Int:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (identifier))
+    body: (block
+      (pass_statement))))
