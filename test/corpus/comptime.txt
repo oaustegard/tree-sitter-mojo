@@ -1,0 +1,44 @@
+==================
+comptime with initializer only
+==================
+
+comptime MAX_BITS = 64
+
+---
+
+(module
+  (comptime_declaration
+    name: (identifier)
+    value: (integer)))
+
+==================
+comptime with type and initializer
+==================
+
+comptime size: Int = 128
+
+---
+
+(module
+  (comptime_declaration
+    name: (identifier)
+    type: (type
+      (identifier))
+    value: (integer)))
+
+==================
+comptime inside struct body
+==================
+
+struct Config:
+    comptime VERSION = 1
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (comptime_declaration
+        name: (identifier)
+        value: (integer)))))

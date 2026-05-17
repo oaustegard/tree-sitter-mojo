@@ -149,6 +149,7 @@ module.exports = grammar({
       $.exec_statement,
       $.type_alias_statement,
       $.variable_declaration,
+      $.comptime_declaration,
     ),
 
     import_statement: $ => seq(
@@ -865,6 +866,13 @@ module.exports = grammar({
 
     variable_declaration: $ => seq(
       'var',
+      field('name', $.identifier),
+      optional(seq(':', field('type', $.type))),
+      optional(seq('=', field('value', $._right_hand_side))),
+    ),
+
+    comptime_declaration: $ => seq(
+      'comptime',
       field('name', $.identifier),
       optional(seq(':', field('type', $.type))),
       optional(seq('=', field('value', $._right_hand_side))),
