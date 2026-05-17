@@ -1,0 +1,93 @@
+==================
+infer-only marker //, in def [...] parameter list
+==================
+
+def f[A: T, //, B: T](x: A) -> B:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier))))
+      (infer_only_separator)
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier)))))
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    return_type: (type
+      (identifier))
+    body: (block
+      (pass_statement))))
+
+==================
+trailing infer-only marker // in fn [...] parameter list
+==================
+
+fn write_to[W: Writer, //](self, mut writer: W):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier))))
+      (infer_only_separator))
+    parameters: (parameters
+      (identifier)
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+infer-only marker followed by trailing comma
+==================
+
+fn g[T: DType, //,](x: T):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier))))
+      (infer_only_separator))
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))

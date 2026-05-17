@@ -1,0 +1,58 @@
+==================
+keyword argument inside parametric subscript
+==================
+
+fn f[T: DType](x: P[mut=True, T]):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier)))))
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (keyword_argument
+                name: (identifier)
+                value: (true))
+              (type
+                (identifier)))))))
+    body: (block
+      (pass_statement))))
+
+==================
+multiple keyword arguments in parametric subscript expression
+==================
+
+alias P = OptionalUnsafePointer[mut=True, origin=MutableAnyOrigin, address_space=AddressSpace.GENERIC]
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    value: (subscript
+      value: (identifier)
+      subscript: (keyword_argument
+        name: (identifier)
+        value: (true))
+      subscript: (keyword_argument
+        name: (identifier)
+        value: (identifier))
+      subscript: (keyword_argument
+        name: (identifier)
+        value: (attribute
+          object: (identifier)
+          attribute: (identifier))))))

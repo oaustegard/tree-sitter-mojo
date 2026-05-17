@@ -2207,6 +2207,11 @@
     }
   },
   {
+    "type": "infer_only_separator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "interpolation",
     "named": true,
     "fields": {
@@ -3108,6 +3113,10 @@
             "named": true
           },
           {
+            "type": "keyword_argument",
+            "named": true
+          },
+          {
             "type": "slice",
             "named": true
           }
@@ -3350,6 +3359,14 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "infer_only_separator",
+          "named": true
+        },
+        {
+          "type": "keyword_argument",
+          "named": true
+        },
         {
           "type": "type",
           "named": true
