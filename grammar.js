@@ -59,6 +59,7 @@ module.exports = grammar({
     [$.match_statement, $.primary_expression],
     [$.mojo_parameter],
     [$.mojo_parameter, $.constrained_type],
+    [$.primary_expression, $.concatenated_string],
   ],
 
   supertypes: $ => [
@@ -294,6 +295,17 @@ module.exports = grammar({
       $.trait_definition,
       $.decorated_definition,
       $.match_statement,
+      $.comptime_statement,
+    ),
+
+    comptime_statement: $ => seq(
+      'comptime',
+      field('body', choice(
+        $.if_statement,
+        $.for_statement,
+        $.while_statement,
+        $.assert_statement,
+      )),
     ),
 
     if_statement: $ => seq(
@@ -1154,10 +1166,10 @@ module.exports = grammar({
       $.expression,
     )),
 
-    concatenated_string: $ => seq(
+    concatenated_string: $ => prec.left(seq(
       $.string,
       repeat1($.string),
-    ),
+    )),
 
     string: $ => seq(
       $.string_start,
