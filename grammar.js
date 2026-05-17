@@ -55,6 +55,8 @@ module.exports = grammar({
     [$.print_statement, $.primary_expression],
     [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
+    [$.mojo_parameter],
+    [$.mojo_parameter, $.constrained_type],
   ],
 
   supertypes: $ => [
@@ -676,6 +678,22 @@ module.exports = grammar({
       $.keyword_separator,
       $.positional_separator,
       $.dictionary_splat_pattern,
+      $.mojo_parameter,
+    ),
+
+    mojo_parameter: $ => prec.dynamic(1, seq(
+      field('convention', $.argument_convention),
+      field('name', $.identifier),
+      optional(seq(
+        ':',
+        field('type', $.type),
+      )),
+    )),
+
+    argument_convention: $ => choice(
+      'owned', 'borrowed', 'inout', 'mut', 'read',
+      'out', 'var', 'deinit',
+      seq('ref', optional(seq('[', field('lifetime', $.identifier), ']'))),
     ),
 
     pattern: $ => choice(
