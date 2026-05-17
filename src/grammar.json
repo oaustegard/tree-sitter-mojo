@@ -1648,45 +1648,72 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "raises_clause"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "->"
+                  "type": "SYMBOL",
+                  "name": "raises_clause"
                 },
                 {
-                  "type": "FIELD",
-                  "name": "return_type",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "type"
-                  }
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "raises_clause"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "->"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "return_type",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "type"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "->"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "return_type",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "type"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "->"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "return_type",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "type"
+                      }
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "raises_clause"
+                    }
+                  ]
                 }
               ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "raises_clause"
             },
             {
               "type": "BLANK"
