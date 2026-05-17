@@ -1,0 +1,14 @@
+==================
+alias with arithmetic expression as value
+==================
+
+alias DOUBLED = MAX_BITS * 2
+
+---
+
+(module
+  (alias_declaration
+    name: (identifier)
+    value: (binary_operator
+      left: (identifier)
+      right: (integer))))

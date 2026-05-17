@@ -1,0 +1,18 @@
+==================
+async fn with raises clause and return type
+==================
+
+async fn fetch() raises -> String:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    (raises_clause)
+    return_type: (type
+      (identifier))
+    body: (block
+      (pass_statement))))
