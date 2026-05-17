@@ -360,6 +360,10 @@
         "named": true
       },
       {
+        "type": "transfer_expression",
+        "named": true
+      },
+      {
         "type": "true",
         "named": true
       },
@@ -794,10 +798,6 @@
           },
           {
             "type": "@",
-            "named": false
-          },
-          {
-            "type": "^",
             "named": false
           },
           {
@@ -3095,6 +3095,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "transfer_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "primary_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
