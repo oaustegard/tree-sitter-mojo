@@ -1,9 +1,11 @@
 /**
- * @file Python grammar for tree-sitter
- * @author Max Brunsfeld <maxbrunsfeld@gmail.com>
+ * @file Mojo grammar for tree-sitter
+ * @author oaustegard
  * @license MIT
- * @see {@link https://docs.python.org/2/reference/grammar.html|Python 2 grammar}
- * @see {@link https://docs.python.org/3/reference/grammar.html|Python 3 grammar}
+ * @see {@link https://docs.modular.com/mojo/manual/|Mojo Manual}
+ *
+ * Forked from tree-sitter-python by Max Brunsfeld <maxbrunsfeld@gmail.com>.
+ * See README "Lineage" section for details.
  */
 
 
@@ -413,14 +415,16 @@ module.exports = grammar({
       field('name', $.identifier),
       field('type_parameters', optional($.type_parameter)),
       field('parameters', $.parameters),
-      optional($.raises_clause),
-      optional(
-        seq(
-          '->',
-          field('return_type', $.type),
-        ),
-      ),
-      optional($.raises_clause),
+      optional(choice(
+        // raises only, no return type
+        $.raises_clause,
+        // raises before return type
+        seq($.raises_clause, '->', field('return_type', $.type)),
+        // return type only, no raises
+        seq('->', field('return_type', $.type)),
+        // return type then raises
+        seq('->', field('return_type', $.type), $.raises_clause),
+      )),
       ':',
       field('body', $._suite),
     ),
