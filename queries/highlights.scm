@@ -17,11 +17,17 @@
 
 ; Builtin functions
 
+; Audited against Mojo stdlib tag mojo/v1.0.0b1 (std/prelude/__init__.mojo).
+; Python-only names (exec, eval, callable, compile, vars, bool, int, float,
+; list, dict, set, str, tuple, ...) dropped — Mojo's equivalents are
+; capitalized types (Bool, Int, Float64, List, Dict, ...) and already match
+; the @constructor rule above. Lowercase Mojo-prelude callables retained;
+; idiomatic Mojo builtins (abort, debug_assert, external_call, ...) added.
 ((call
   function: (identifier) @function.builtin)
  (#match?
    @function.builtin
-   "^(abs|all|any|ascii|bin|bool|breakpoint|bytearray|bytes|callable|chr|classmethod|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|vars|zip|__import__)$"))
+   "^(abort|abs|all|any|ascii|atof|atol|bin|breakpoint|chr|constrained|debug_assert|divmod|enumerate|external_call|hash|hex|input|iter|len|map|materialize|max|min|next|oct|open|ord|partition|pow|print|range|rebind|rebind_var|reflect|repr|reversed|round|slice|sort|swap|trait_downcast|trait_downcast_var|zip)$"))
 
 ; Mojo built-in decorators (recognized before the generic @function below)
 
@@ -143,3 +149,36 @@
   "match"
   "case"
 ] @keyword
+
+; Mojo-specific declaration keywords. The grammar accepts each as an
+; anonymous string token (see grammar.js: `fn` in function_definition,
+; `raises` in raises_clause, etc.), so literal-token highlighting fires.
+
+[
+  "fn"
+  "var"
+  "struct"
+  "trait"
+  "alias"
+  "comptime"
+] @keyword
+
+; `raises` is wrapped in a single-token rule (raises_clause) by the
+; grammar, so highlight it via the rule rather than the bare literal.
+
+(raises_clause) @keyword
+
+; Mojo argument-convention keywords. Appear only inside `mojo_parameter`
+; (see grammar.js: argument_convention). Captured as @keyword.modifier so
+; themes can color them distinctly from control-flow keywords.
+
+[
+  "owned"
+  "borrowed"
+  "inout"
+  "mut"
+  "read"
+  "ref"
+  "out"
+  "deinit"
+] @keyword.modifier
