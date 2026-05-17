@@ -1,3 +1,12 @@
+; Mojo self / Self (highlighted before the general naming-convention
+; rules below so they take precedence on the literal identifiers).
+
+((identifier) @variable.builtin
+ (#eq? @variable.builtin "self"))
+
+((identifier) @type.builtin
+ (#eq? @type.builtin "Self"))
+
 ; Identifier naming conventions
 
 ((identifier) @constructor
