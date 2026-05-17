@@ -37,6 +37,21 @@ edge case is hours.
    positional variations the issue calls out — don't write the test from
    the implementation you're already drafting in your head; write it from
    the spec.
+
+   **Generate the expected S-expression, don't hand-write it.** For any
+   case involving parameterized types, subscripts, attribute access, or
+   built-in literals (`None`, `True`, `False`), write the source into a
+   temp `.mojo` file and run `tree-sitter parse <file>` to get the actual
+   tree, then paste it as the expected output. Three consecutive PRs
+   (#11, #12, #15) tripped on guessed S-expressions:
+   - `None` parses to `(none)`, not `(identifier)`
+   - `List[String]` parses to `(generic_type (identifier) (type_parameter ...))`,
+     not `(subscript ...)`
+   - `SIMD[A, B]` subscript children carry field names `value:` and
+     `subscript:`, not positional
+   Hand-writing only works for trees with bare identifiers and primitive
+   literals (`integer`, `string`, `pass_statement`). Anything richer:
+   parse it first.
 3. **Stub** if the construct is new enough that `grammar.js` doesn't
    reference it at all yet. Often not needed for tree-sitter — you can
    skip straight to step 4.
@@ -67,8 +82,9 @@ edge case is hours.
   message — it usually points at exactly which rules need precedence or
   reordering.
 - The corpus-test format is finicky about whitespace inside the
-  S-expression block. Copy the actual `tree-sitter parse <file>` output
-  rather than hand-writing the expected tree.
+  S-expression block. (Field names and indentation matter; the expected
+  tree must match the parser output exactly. See step 2 for the
+  parse-first discipline this implies.)
 - `script/check-errors.sh` counts both `ERROR` and `MISSING` nodes.
   A grammar change can drop ERROR count while introducing MISSING — both
   matter.
