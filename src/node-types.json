@@ -8,6 +8,10 @@
         "named": true
       },
       {
+        "type": "comptime_statement",
+        "named": true
+      },
+      {
         "type": "decorated_definition",
         "named": true
       },
@@ -1283,6 +1287,34 @@
           },
           {
             "type": "yield",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "comptime_statement",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assert_statement",
+            "named": true
+          },
+          {
+            "type": "for_statement",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "while_statement",
             "named": true
           }
         ]

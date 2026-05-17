@@ -1,0 +1,158 @@
+==================
+comptime if as statement-prefix
+==================
+
+def f():
+    comptime if x:
+        pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_statement
+        body: (if_statement
+          condition: (identifier)
+          consequence: (block
+            (pass_statement)))))))
+
+==================
+comptime if / else
+==================
+
+def f():
+    comptime if x == 1:
+        return 1
+    else:
+        return 2
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_statement
+        body: (if_statement
+          condition: (comparison_operator
+            (identifier)
+            (integer))
+          consequence: (block
+            (return_statement
+              (integer)))
+          alternative: (else_clause
+            body: (block
+              (return_statement
+                (integer)))))))))
+
+==================
+comptime for (replaces @parameter for)
+==================
+
+def f():
+    comptime for i in xs:
+        do(i)
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_statement
+        body: (for_statement
+          left: (identifier)
+          right: (identifier)
+          body: (block
+            (call
+              function: (identifier)
+              arguments: (argument_list
+                (identifier)))))))))
+
+==================
+comptime while
+==================
+
+def f():
+    comptime while x:
+        pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_statement
+        body: (while_statement
+          condition: (identifier)
+          body: (block
+            (pass_statement)))))))
+
+==================
+comptime assert (no message)
+==================
+
+def f():
+    comptime assert n > 0
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_statement
+        body: (assert_statement
+          (comparison_operator
+            (identifier)
+            (integer)))))))
+
+==================
+comptime assert with message
+==================
+
+def f():
+    comptime assert n > 0, "must be positive"
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_statement
+        body: (assert_statement
+          (comparison_operator
+            (identifier)
+            (integer))
+          (string
+            (string_start)
+            (string_content)
+            (string_end)))))))
+
+==================
+comptime_declaration still works (regression guard)
+==================
+
+def f():
+    comptime MAX = 64
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (comptime_declaration
+        name: (identifier)
+        value: (integer)))))
