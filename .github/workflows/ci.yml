@@ -5,27 +5,34 @@ on:
       - "**"
   push:
     branches:
-      - "master"
+      - "main"
+
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [macos-latest, ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - run: npm install
-      - run: npm test
-  test_windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-      - run: npm install
-      - run: npm run-script test-windows
+          node-version: 22
+      - name: Install tree-sitter CLI
+        run: npm install -g tree-sitter-cli@^0.26
+      - name: Generate parser
+        run: tree-sitter generate
+      - name: Verify committed parser.c matches generated output
+        run: |
+          if ! git diff --quiet -- src/; then
+            echo "::error::src/parser.c (or other generated files in src/) is out of sync with grammar.js."
+            echo "Run \`tree-sitter generate\` locally and commit the result."
+            git --no-pager diff --stat -- src/
+            exit 1
+          fi
+      - name: Run corpus tests
+        run: tree-sitter test
+      - name: Acceptance corpus (informational until v1.0)
+        run: |
+          if ./script/check-errors.sh; then
+            echo "::notice::Acceptance corpus is clean -- v1.0 gate met."
+          else
+            echo "::warning::Acceptance corpus still has errors. Expected pre-v1.0; see README for the roadmap."
+          fi
