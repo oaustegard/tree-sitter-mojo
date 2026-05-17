@@ -1773,8 +1773,29 @@
       ]
     },
     "raises_clause": {
-      "type": "STRING",
-      "value": "raises"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "raises"
+        },
+        {
+          "type": "FIELD",
+          "name": "error_type",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "type"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        }
+      ]
     },
     "parameters": {
       "type": "SEQ",
@@ -6867,6 +6888,10 @@
     [
       "primary_expression",
       "concatenated_string"
+    ],
+    [
+      "raises_clause",
+      "constrained_type"
     ]
   ],
   "precedences": [],

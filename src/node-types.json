@@ -2901,6 +2901,22 @@
     }
   },
   {
+    "type": "raises_clause",
+    "named": true,
+    "fields": {
+      "error_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "relative_import",
     "named": true,
     "fields": {},
@@ -4152,8 +4168,8 @@
     "named": false
   },
   {
-    "type": "raises_clause",
-    "named": true
+    "type": "raises",
+    "named": false
   },
   {
     "type": "read",

@@ -1,0 +1,107 @@
+==================
+typed raises only, no return type
+==================
+
+fn f() raises ErrorType:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    (raises_clause
+      error_type: (type
+        (identifier)))
+    body: (block
+      (pass_statement))))
+
+==================
+typed raises before return type
+==================
+
+fn f() raises ErrorType -> String:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    (raises_clause
+      error_type: (type
+        (identifier)))
+    return_type: (type
+      (identifier))
+    body: (block
+      (pass_statement))))
+
+==================
+typed raises after return type
+==================
+
+fn f() -> String raises ErrorType:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (identifier))
+    (raises_clause
+      error_type: (type
+        (identifier)))
+    body: (block
+      (pass_statement))))
+
+==================
+typed raises in struct method
+==================
+
+struct S:
+    fn m(self, x: Int) raises MyErr -> String:
+        pass
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (identifier)
+          (typed_parameter
+            (identifier)
+            type: (type
+              (identifier))))
+        (raises_clause
+          error_type: (type
+            (identifier)))
+        return_type: (type
+          (identifier))
+        body: (block
+          (pass_statement))))))
+
+==================
+bare raises (regression guard)
+==================
+
+fn f() raises:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    (raises_clause)
+    body: (block
+      (pass_statement))))

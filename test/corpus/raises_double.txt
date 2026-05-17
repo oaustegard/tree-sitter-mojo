@@ -14,7 +14,6 @@ fn f() raises -> Int raises:
     (raises_clause)
     return_type: (type
       (identifier))
-    (ERROR
-      (raises_clause))
+    (ERROR)
     body: (block
       (pass_statement))))

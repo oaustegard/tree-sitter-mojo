@@ -60,6 +60,7 @@ module.exports = grammar({
     [$.mojo_parameter],
     [$.mojo_parameter, $.constrained_type],
     [$.primary_expression, $.concatenated_string],
+    [$.raises_clause, $.constrained_type],
   ],
 
   supertypes: $ => [
@@ -441,7 +442,10 @@ module.exports = grammar({
       field('body', $._suite),
     ),
 
-    raises_clause: _ => 'raises',
+    raises_clause: $ => seq(
+      'raises',
+      field('error_type', optional($.type)),
+    ),
 
     parameters: $ => seq(
       '(',
