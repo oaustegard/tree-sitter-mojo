@@ -1,0 +1,202 @@
+==================
+borrowed convention with parameterized type
+==================
+
+fn foo(borrowed x: List[Int]):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (type
+                (identifier)))))))
+    body: (block
+      (pass_statement))))
+
+==================
+owned convention
+==================
+
+fn foo(owned x: String):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+inout convention
+==================
+
+fn foo(inout x: List[Int]):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (type
+                (identifier)))))))
+    body: (block
+      (pass_statement))))
+
+==================
+mut convention (newer spelling)
+==================
+
+fn foo(mut x: List[Int]):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (generic_type
+            (identifier)
+            (type_parameter
+              (type
+                (identifier)))))))
+    body: (block
+      (pass_statement))))
+
+==================
+read convention (newer spelling for borrowed)
+==================
+
+fn foo(read x: Int):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+ref convention without lifetime bracket
+==================
+
+fn foo(ref x: T):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+ref convention with lifetime bracket
+==================
+
+fn foo(ref [origin] x: T):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention
+          lifetime: (identifier))
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
+
+==================
+out self (untyped)
+==================
+
+def __init__(out self):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)))
+    body: (block
+      (pass_statement))))
+
+==================
+mixed: out self with deinit-style modifier
+==================
+
+def __init__(out self, deinit take: Self):
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier))
+      (mojo_parameter
+        convention: (argument_convention)
+        name: (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (pass_statement))))
