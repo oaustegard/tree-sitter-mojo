@@ -711,7 +711,7 @@ module.exports = grammar({
 
     mojo_parameter: $ => prec.dynamic(1, seq(
       field('convention', $.argument_convention),
-      field('name', $.identifier),
+      field('name', choice($.identifier, $.list_splat_pattern)),
       optional(seq(
         ':',
         field('type', $.type),

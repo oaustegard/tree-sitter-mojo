@@ -2655,6 +2655,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "list_splat_pattern",
+            "named": true
           }
         ]
       },
